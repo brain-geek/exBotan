@@ -4,7 +4,6 @@ defmodule Botan.Api do
   """
 
   @base_url "https://api.botan.io/track?"
-  @token Application.get_env(:botan, :token)
 
   alias Botan.ResponseParser
 
@@ -31,6 +30,10 @@ defmodule Botan.Api do
   end
 
   defp build_url(event, uid) do
-    @base_url <> URI.encode_query(%{token: @token, uid: uid, name: event})
+    @base_url <> URI.encode_query(%{token: token, uid: uid, name: event})
+  end
+
+  defp token do
+    Application.get_env(:botan, :token)
   end
 end
